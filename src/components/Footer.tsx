@@ -4,8 +4,7 @@ const Footer = () => (
   <footer className="bg-hero py-10">
     <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="flex items-center gap-2 text-hero-foreground font-heading font-bold text-lg">
-        <span className="inline-block w-6 h-6 bg-cta rounded-sm flex items-center justify-center text-cta-foreground font-black text-xs">#</span>
-        NGUS
+        Admetaverse
       </div>
       <ul className="flex items-center gap-6 text-hero-foreground/70 text-sm">
         <li><a href="#services" className="hover:text-hero-foreground transition-colors">Services</a></li>
@@ -22,7 +21,7 @@ const Footer = () => (
       </div>
     </div>
     <div className="container mx-auto px-4 mt-6 pt-6 border-t border-hero-foreground/10">
-      <p className="text-hero-foreground/40 text-xs text-center">© 2026 NGUS Digital Marketing. All rights reserved.</p>
+      <p className="text-hero-foreground/40 text-xs text-center">© 2026 Admetaverse. All rights reserved.</p>
     </div>
   </footer>
 );

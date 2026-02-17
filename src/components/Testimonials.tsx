@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 
 const testimonials = [
-  { name: "Sarah Martinez", role: "Company Director", text: "NGUS transformed our online presence. Our leads increased by 300% in just 3 months!" },
+  { name: "Sarah Martinez", role: "Company Director", text: "Admetaverse transformed our online presence. Our leads increased by 300% in just 3 months!" },
   { name: "Nami Campbell", role: "Startup Founder", text: "Professional, responsive, and results-driven. The best marketing team we've worked with." },
   { name: "James Wilson", role: "E-Commerce Manager", text: "Their SEO strategy put us on the first page of Google. Couldn't be happier with the results." },
 ];

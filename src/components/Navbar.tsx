@@ -15,8 +15,7 @@ const Navbar = () => {
     <nav className="absolute top-0 left-0 w-full z-50">
       <div className="container mx-auto flex items-center justify-between py-5 px-4">
         <a href="#" className="flex items-center gap-2 text-hero-foreground font-heading font-bold text-xl tracking-tight">
-          <span className="inline-block w-7 h-7 bg-cta rounded-sm flex items-center justify-center text-cta-foreground font-black text-base">#</span>
-          NGUS
+          Admetaverse
         </a>
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8">
