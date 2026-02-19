@@ -31,6 +31,7 @@ const item = {
 const Services = () =>
 <section id="services" className="py-20 bg-background">
     <div className="container mx-auto px-4">
+      <h2 className="font-heading font-bold text-3xl text-center mb-12 text-foreground">Services</h2>
       <motion.div
       variants={container}
       initial="hidden"
