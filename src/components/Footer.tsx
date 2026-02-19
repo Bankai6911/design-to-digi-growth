@@ -6,11 +6,10 @@ const Footer = () =>
       <div className="flex items-center gap-2 text-hero-foreground font-heading font-bold text-lg">
         Admetaverse
       </div>
-      <ul className="flex items-center gap-6 text-hero-foreground/70 text-sm">
+      <ul className="flex items-center justify-center gap-12 text-hero-foreground/70 text-sm">
         <li><a href="#services" className="hover:text-hero-foreground transition-colors">Services</a></li>
         <li><a href="#about" className="hover:text-hero-foreground transition-colors">About Us</a></li>
-        
-        <li><a href="#contact" className="hover:text-hero-foreground transition-colors">Contact</a></li>
+        <li><a href="#contact" className="hover:text-hero-foreground transition-colors">Contact Us</a></li>
       </ul>
       <div className="flex items-center gap-4">
         {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) =>
