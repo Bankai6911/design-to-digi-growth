@@ -74,7 +74,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-primary/98 backdrop-blur-2xl border-t border-hero-foreground/10 overflow-hidden"
+            className="md:hidden bg-primary/98 backdrop-blur-2xl border-t border-hero-foreground/10"
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
               {navLinks.map((l, i) => (
@@ -86,8 +86,15 @@ const Navbar = () => {
                 >
                   <a
                     href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block py-3 text-hero-foreground font-medium text-base border-b border-hero-foreground/5"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpen(false);
+                      const target = document.querySelector(l.href);
+                      if (target) {
+                        setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 300);
+                      }
+                    }}
+                    className="block py-3 text-hero-foreground font-medium text-base border-b border-hero-foreground/5 cursor-pointer relative z-10"
                   >
                     {l.label}
                   </a>
@@ -100,8 +107,15 @@ const Navbar = () => {
               >
                 <a
                   href="#contact"
-                  onClick={() => setOpen(false)}
-                  className="inline-block mt-3 bg-cta text-cta-foreground font-semibold px-6 py-3 rounded-lg text-sm w-full text-center"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    const target = document.querySelector("#contact");
+                    if (target) {
+                      setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 300);
+                    }
+                  }}
+                  className="inline-block mt-3 bg-cta text-cta-foreground font-semibold px-6 py-3 rounded-lg text-sm w-full text-center cursor-pointer relative z-10"
                 >
                   Get Started
                 </a>
