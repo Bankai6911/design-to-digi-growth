@@ -23,11 +23,11 @@ const WhyChooseUs = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-hero rounded-xl p-8 md:p-12 flex flex-row items-center gap-10"
+        className="bg-hero rounded-xl p-8 md:p-12 flex flex-col gap-10"
       >
-        <div className="flex-1">
-          <p className="text-hero-foreground/60 text-4xl font-heading mb-2">"</p>
-          <h3 className="font-heading font-bold text-xl md:text-2xl text-hero-foreground mb-4">
+        <div className="flex flex-row items-start gap-6">
+          <p className="text-hero-foreground/60 text-4xl font-heading shrink-0">"</p>
+          <h3 className="font-heading font-bold text-xl md:text-2xl text-hero-foreground">
             We Provide Our Clients<br />Award-Winning Results
           </h3>
           <p className="text-hero-foreground/70 text-sm leading-relaxed max-w-md">
