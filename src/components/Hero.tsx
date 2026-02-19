@@ -17,7 +17,7 @@ const Hero = () =>
         </p>
         <a
         href="#contact"
-        className="inline-block bg-cta text-cta-foreground font-semibold px-7 py-3 rounded-md hover:brightness-110 transition text-sm uppercase tracking-wide">
+        className="inline-block bg-cta text-cta-foreground font-semibold px-7 py-3 rounded-md hover:brightness-110 transition text-sm uppercase tracking-wide bg-red-500 border-dotted text-primary-foreground">
 
           Get a Free Consultation
         </a>
