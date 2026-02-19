@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,41 +7,45 @@
 @layer base {
   :root {
     --background: 220 20% 97%;
-    --foreground: 220 30% 15%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 222 50% 22%;
+    --primary: 222 50% 18%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 20% 96%;
-    --secondary-foreground: 222 50% 22%;
+    --secondary-foreground: 222 50% 18%;
 
     --muted: 220 15% 94%;
-    --muted-foreground: 220 10% 50%;
+    --muted-foreground: 220 10% 46%;
 
-    --accent: 130 55% 42%;
+    --accent: 147 64% 42%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 222 50% 22%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 222 50% 18%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --hero-bg: 222 50% 22%;
+    --hero-bg: 222 50% 12%;
     --hero-foreground: 0 0% 100%;
     --cta: 0 72% 51%;
     --cta-foreground: 0 0% 100%;
-    --section-bg: 220 20% 97%;
-    --navy-dark: 222 55% 18%;
+    --section-alt: 220 25% 95%;
+    --navy-dark: 222 55% 10%;
+
+    --glass: 0 0% 100% / 0.06;
+    --glass-border: 0 0% 100% / 0.12;
+    --glass-strong: 0 0% 100% / 0.1;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -52,29 +56,29 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --font-heading: 'Poppins', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
   }
 
   .dark {
-    --background: 222 50% 8%;
+    --background: 222 50% 5%;
     --foreground: 210 40% 95%;
-    --card: 222 50% 12%;
+    --card: 222 50% 9%;
     --card-foreground: 210 40% 95%;
-    --popover: 222 50% 12%;
+    --popover: 222 50% 9%;
     --popover-foreground: 210 40% 95%;
     --primary: 210 40% 98%;
-    --primary-foreground: 222 50% 22%;
-    --secondary: 217 32% 17%;
+    --primary-foreground: 222 50% 18%;
+    --secondary: 217 32% 14%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217 32% 17%;
+    --muted: 217 32% 14%;
     --muted-foreground: 215 20% 65%;
-    --accent: 130 55% 42%;
+    --accent: 147 64% 42%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
+    --border: 217 32% 14%;
+    --input: 217 32% 14%;
     --ring: 212 26% 83%;
   }
 }
@@ -85,12 +89,56 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: hsla(var(--glass));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsla(var(--glass-border));
+  }
+
+  .glass-strong {
+    background: hsla(var(--glass-strong));
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsla(var(--glass-border));
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 100% / 0.7));
+  }
+
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 0 20px 4px hsl(var(--cta) / 0.4);
+  }
+
+  .btn-glow:hover::after {
+    opacity: 1;
+  }
+
+  .section-padding {
+    @apply py-16 px-5 md:py-24 md:px-4;
   }
 }
 
