@@ -12,7 +12,7 @@ const contactSchema = z.object({
 });
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@admetaverse.com" },
+  { icon: Mail, label: "Email", value: "wasades851@gmail.com" },
   { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
   { icon: MapPin, label: "Location", value: "New York, NY" },
 ];
