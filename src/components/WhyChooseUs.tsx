@@ -26,12 +26,12 @@ const WhyChooseUs = () =>
       className="bg-hero rounded-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
 
         <div className="flex-1">
-          <p className="text-hero-foreground/60 text-4xl font-heading mb-2">"</p>
+          
           <h3 className="font-heading font-bold text-xl md:text-2xl text-hero-foreground mb-4">
             We Provide Our Clients<br />Award-Winning Results
           </h3>
           <p className="text-hero-foreground/70 text-sm leading-relaxed max-w-md">
-            We combine high-performance website development, strategic SEO, and data-driven social media marketing to turn your online presence into a powerful revenue engine.
+            Our data-driven approach ensures every campaign is optimized for maximum impact. We've helped hundreds of businesses scale their digital presence.
           </p>
         </div>
         <div className="flex flex-wrap gap-8 justify-center">
