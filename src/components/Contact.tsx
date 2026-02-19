@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -9,6 +10,12 @@ const contactSchema = z.object({
   phone: z.string().trim().max(20).optional(),
   message: z.string().trim().min(1, "Message is required").max(1000),
 });
+
+const contactInfo = [
+  { icon: Mail, label: "Email", value: "hello@admetaverse.com" },
+  { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
+  { icon: MapPin, label: "Location", value: "New York, NY" },
+];
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -31,72 +38,122 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-secondary/50">
-      <div className="container mx-auto px-4">
-        <motion.h2
+    <section id="contact" className="section-padding bg-background">
+      <div className="container mx-auto">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-12"
+          className="text-center mb-14"
         >
-          Contact Us
-        </motion.h2>
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto bg-card rounded-xl border border-border p-8 space-y-5"
-        >
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div>
-              <label className="block text-sm font-medium text-card-foreground mb-1">Name</label>
-              <input
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                placeholder="Your name"
-              />
-              {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-card-foreground mb-1">Phone</label>
-              <input
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                placeholder="Phone (optional)"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-card-foreground mb-1">Email</label>
-            <input
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-              placeholder="your@email.com"
-            />
-            {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-card-foreground mb-1">Message</label>
-            <textarea
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              rows={4}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-              placeholder="Tell us about your project..."
-            />
-            {errors.message && <p className="text-destructive text-xs mt-1">{errors.message}</p>}
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-cta text-cta-foreground font-semibold py-3 rounded-md hover:brightness-110 transition uppercase text-sm tracking-wide"
+          <span className="text-cta text-xs font-semibold uppercase tracking-[0.2em] mb-3 block">
+            Get In Touch
+          </span>
+          <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-4">
+            Contact Us
+          </h2>
+          <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base leading-relaxed">
+            Ready to grow your business? Let's start a conversation.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-5 gap-8 max-w-5xl mx-auto">
+          {/* Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="md:col-span-2 space-y-6"
           >
-            Send Message
-          </button>
-        </motion.form>
+            {contactInfo.map((c) => (
+              <div key={c.label} className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-primary/8 flex items-center justify-center flex-shrink-0">
+                  <c.icon className="w-5 h-5 text-primary" strokeWidth={1.8} />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground mb-0.5">{c.label}</p>
+                  <p className="text-foreground font-medium text-sm">{c.value}</p>
+                </div>
+              </div>
+            ))}
+
+            <div className="bg-primary rounded-2xl p-6 mt-8">
+              <h3 className="font-heading font-semibold text-hero-foreground text-lg mb-2">
+                Free Strategy Call
+              </h3>
+              <p className="text-hero-foreground/60 text-sm leading-relaxed">
+                Book a 30-minute call with our experts and get actionable insights for your business.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="md:col-span-3 bg-card rounded-2xl border border-border p-7 md:p-8 space-y-5"
+          >
+            <div className="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-xs font-medium text-card-foreground mb-1.5">
+                  Name
+                </label>
+                <input
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 transition-shadow"
+                  placeholder="Your name"
+                />
+                {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-card-foreground mb-1.5">
+                  Phone
+                </label>
+                <input
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 transition-shadow"
+                  placeholder="Phone (optional)"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-card-foreground mb-1.5">
+                Email
+              </label>
+              <input
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 transition-shadow"
+                placeholder="your@email.com"
+              />
+              {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-card-foreground mb-1.5">
+                Message
+              </label>
+              <textarea
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                rows={4}
+                className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 resize-none transition-shadow"
+                placeholder="Tell us about your project..."
+              />
+              {errors.message && <p className="text-destructive text-xs mt-1">{errors.message}</p>}
+            </div>
+            <button
+              type="submit"
+              className="group w-full flex items-center justify-center gap-2 bg-cta text-cta-foreground font-semibold py-3.5 rounded-xl text-sm hover:shadow-glow hover:scale-[1.02] transition-all duration-300"
+            >
+              Send Message
+              <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </motion.form>
+        </div>
       </div>
     </section>
   );
