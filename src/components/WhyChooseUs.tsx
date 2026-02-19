@@ -23,7 +23,7 @@ const WhyChooseUs = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-hero rounded-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10"
+        className="bg-hero rounded-xl p-8 md:p-12 flex flex-row items-center gap-10"
       >
         <div className="flex-1">
           <p className="text-hero-foreground/60 text-4xl font-heading mb-2">"</p>
