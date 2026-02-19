@@ -28,7 +28,7 @@ const Hero = () => (
         transition={{ duration: 0.8, delay: 0.2 }}
         className="hidden md:block"
       >
-        <img src={heroImg} alt="Digital marketing team analyzing data dashboards" className="w-full h-auto rounded-lg object-cover max-h-[400px]" />
+        <img src={heroImg} alt="Digital marketing team analyzing data dashboards" className="w-full h-full rounded-lg object-cover" />
       </motion.div>
     </div>
     {/* Diagonal bottom */}
