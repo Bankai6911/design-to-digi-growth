@@ -28,7 +28,7 @@ const WhyChooseUs = () =>
         <div className="flex-1">
           
           <h3 className="font-heading font-bold text-xl md:text-2xl text-hero-foreground mb-4">
-            We Provide Our Clients<br />Award-Winning Results
+            We Deliver Measurable Growth — Not Just Services
           </h3>
           <p className="text-hero-foreground/70 text-sm leading-relaxed max-w-md">
             Our data-driven approach ensures every campaign is optimized for maximum impact. We've helped hundreds of businesses scale their digital presence.
