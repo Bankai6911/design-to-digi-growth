@@ -47,16 +47,9 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        hero: {
-          DEFAULT: "hsl(var(--hero-bg))",
-          foreground: "hsl(var(--hero-foreground))",
-        },
-        cta: {
-          DEFAULT: "hsl(var(--cta))",
-          foreground: "hsl(var(--cta-foreground))",
-        },
-        "section-alt": "hsl(var(--section-alt))",
-        "navy-dark": "hsl(var(--navy-dark))",
+        "neon-blue": "hsl(var(--neon-blue))",
+        "neon-purple": "hsl(var(--neon-purple))",
+        "neon-cyan": "hsl(var(--neon-cyan))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -100,9 +93,13 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        "counter-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+        pulse_glow: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
+        },
+        "orbit": {
+          "0%": { transform: "rotate(0deg) translateX(120px) rotate(0deg)" },
+          "100%": { transform: "rotate(360deg) translateX(120px) rotate(-360deg)" },
         },
       },
       animation: {
@@ -112,13 +109,15 @@ export default {
         "fade-in": "fade-in 0.5s ease-out forwards",
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
-        "counter-up": "counter-up 0.6s ease-out forwards",
+        "pulse-glow": "pulse_glow 3s ease-in-out infinite",
+        "orbit": "orbit 20s linear infinite",
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.08)",
-        "glass-lg": "0 16px 48px 0 rgba(0, 0, 0, 0.12)",
-        premium: "0 4px 24px -4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04)",
-        glow: "0 0 40px -10px hsl(var(--cta) / 0.3)",
+        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
+        "glass-lg": "0 16px 48px 0 rgba(0, 0, 0, 0.3)",
+        "neon-blue": "0 0 30px -5px hsl(220 90% 60% / 0.3)",
+        "neon-purple": "0 0 30px -5px hsl(270 80% 65% / 0.3)",
+        glow: "0 0 40px -10px hsl(220 90% 60% / 0.4)",
       },
     },
   },
