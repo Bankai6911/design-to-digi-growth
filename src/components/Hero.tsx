@@ -1,140 +1,98 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, BarChart3 } from "lucide-react";
 
 const Hero = () => (
-  <section className="relative min-h-[100svh] bg-primary overflow-hidden flex items-center">
+  <section className="relative min-h-[100svh] bg-background overflow-hidden flex items-center">
+    {/* Animated grid background */}
+    <div className="absolute inset-0 grid-bg" />
+    
     {/* Gradient orbs */}
-    <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full bg-cta/10 blur-[120px] pointer-events-none" />
-    <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px] pointer-events-none" />
+    <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-neon-blue/8 blur-[150px] pointer-events-none animate-pulse-glow" />
+    <div className="absolute bottom-[-20%] left-[-15%] w-[500px] h-[500px] rounded-full bg-neon-purple/8 blur-[130px] pointer-events-none animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+    <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] rounded-full bg-neon-cyan/5 blur-[100px] pointer-events-none" />
 
-    {/* Grid pattern overlay */}
-    <div
-      className="absolute inset-0 opacity-[0.03]"
-      style={{
-        backgroundImage:
-          "linear-gradient(hsl(0 0% 100% / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100% / 0.1) 1px, transparent 1px)",
-        backgroundSize: "60px 60px",
-      }}
+    {/* Floating particles */}
+    <motion.div
+      animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-[20%] right-[15%] w-2 h-2 rounded-full bg-neon-blue/40"
+    />
+    <motion.div
+      animate={{ y: [0, 15, 0], x: [0, -8, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-[60%] left-[10%] w-1.5 h-1.5 rounded-full bg-neon-purple/50"
+    />
+    <motion.div
+      animate={{ y: [0, -12, 0] }}
+      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute bottom-[30%] right-[25%] w-1 h-1 rounded-full bg-neon-cyan/60"
     />
 
     <div className="container mx-auto px-5 pt-24 pb-16 md:pt-32 md:pb-24 relative z-10">
-      <div className="grid md:grid-cols-2 items-center gap-12 md:gap-16">
-        {/* Text */}
-        <div className="order-2 md:order-1">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-6"
-          >
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-hero-foreground/70 text-xs font-medium tracking-wide uppercase">
-              Digital Marketing Agency
-            </span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading font-bold text-[2.5rem] leading-[1.1] md:text-5xl lg:text-6xl text-hero-foreground mb-5"
-          >
-            Accelerate Your
-            <br />
-            <span className="text-gradient">Online Growth</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-hero-foreground/60 text-base md:text-lg leading-relaxed mb-8 max-w-md"
-          >
-            Drive traffic, engage your audience & build a digital presence that
-            converts visitors into loyal customers.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-3"
-          >
-            <a
-              href="#contact"
-              className="group inline-flex items-center justify-center gap-2 bg-cta text-cta-foreground font-semibold px-7 py-3.5 rounded-xl text-sm btn-glow hover:scale-[1.03] transition-all duration-300"
-            >
-              Get a Free Consultation
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center justify-center gap-2 glass text-hero-foreground font-medium px-7 py-3.5 rounded-xl text-sm hover:bg-hero-foreground/10 transition-all duration-300"
-            >
-              <Play className="w-4 h-4" />
-              See How It Works
-            </a>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-10 flex gap-8"
-          >
-            {[
-              { num: "200+", label: "Clients" },
-              { num: "95%", label: "Retention" },
-              { num: "3x", label: "Avg. ROI" },
-            ].map((s) => (
-              <div key={s.label}>
-                <p className="text-hero-foreground font-heading font-bold text-2xl md:text-3xl">
-                  {s.num}
-                </p>
-                <p className="text-hero-foreground/40 text-xs mt-0.5">
-                  {s.label}
-                </p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Image */}
+      <div className="max-w-4xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="order-1 md:order-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-8"
         >
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-cta/20 to-accent/20 rounded-2xl md:rounded-3xl blur-2xl scale-105" />
-            <img
-              alt="Digital marketing team analyzing data dashboards"
-              className="relative w-full aspect-[4/3] md:aspect-auto md:h-[480px] rounded-2xl md:rounded-3xl object-cover shadow-glass-lg"
-              src="/lovable-uploads/76901592-0728-41a0-bd71-68c061f3771d.jpg"
-            />
-            {/* Floating card */}
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-4 -left-2 md:-left-6 glass-strong rounded-xl px-4 py-3 flex items-center gap-3"
-            >
-              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                <span className="text-accent text-lg">📈</span>
-              </div>
-              <div>
-                <p className="text-hero-foreground font-semibold text-sm">+300%</p>
-                <p className="text-hero-foreground/50 text-[10px]">Traffic Growth</p>
-              </div>
-            </motion.div>
-          </div>
+          <span className="w-2 h-2 rounded-full bg-neon-blue animate-pulse" />
+          <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+            Digital Growth Agency
+          </span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="font-heading font-bold text-[2.2rem] leading-[1.1] md:text-5xl lg:text-6xl xl:text-7xl text-foreground mb-6"
+        >
+          We Engineer{" "}
+          <span className="text-gradient-blue">Digital Growth</span>
+          <br />
+          Systems for Modern Businesses.
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="text-muted-foreground text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
+        >
+          Web Design. SEO. Paid Ads. Marketplace Optimization.
+          <br className="hidden sm:block" />
+          Everything your business needs to attract, convert, and scale online.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="group inline-flex items-center justify-center gap-2 bg-gradient-neon text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm btn-glow hover:scale-[1.03] transition-all duration-300"
+          >
+            🚀 Launch My Business Online
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="#services"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="group inline-flex items-center justify-center gap-2 glass neon-border text-foreground font-medium px-8 py-4 rounded-xl text-sm hover:bg-neon-blue/5 transition-all duration-300"
+          >
+            <BarChart3 className="w-4 h-4 text-neon-blue" />
+            📈 Get a Free Growth Plan
+          </a>
         </motion.div>
       </div>
     </div>
 
-    {/* Smooth bottom transition */}
-    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+    {/* Bottom gradient transition */}
+    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
   </section>
 );
 

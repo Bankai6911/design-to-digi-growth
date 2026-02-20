@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "Services", href: "#services" },
-  { label: "About Us", href: "#about" },
+  { label: "Process", href: "#process" },
+  { label: "Why Us", href: "#why-us" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -18,29 +19,30 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const scrollTo = (href: string) => {
+    setOpen(false);
+    const el = document.querySelector(href);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-primary/95 backdrop-blur-xl shadow-glass-lg"
-          : "bg-transparent"
+        scrolled ? "glass-strong shadow-glass-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-5">
-        <a
-          href="#"
-          className="font-heading font-bold text-xl tracking-tight text-hero-foreground"
-        >
-          AdMetaverse
+        <a href="#" className="font-heading font-bold text-xl tracking-tight text-foreground">
+          <span className="text-gradient-blue">Ad</span>Metaverse
         </a>
 
-        {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-hero-foreground/80 font-medium hover:text-hero-foreground transition-colors text-sm relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-cta after:transition-all after:duration-300 hover:after:w-full"
+                onClick={(e) => { e.preventDefault(); scrollTo(l.href); }}
+                className="text-muted-foreground font-medium hover:text-foreground transition-colors text-sm"
               >
                 {l.label}
               </a>
@@ -49,16 +51,16 @@ const Navbar = () => {
           <li>
             <a
               href="#contact"
-              className="bg-cta text-cta-foreground font-semibold px-5 py-2 rounded-lg text-sm hover:shadow-glow transition-all duration-300 hover:scale-105"
+              onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+              className="bg-gradient-neon text-primary-foreground font-semibold px-5 py-2 rounded-lg text-sm btn-glow hover:scale-105 transition-all duration-300"
             >
               Get Started
             </a>
           </li>
         </ul>
 
-        {/* Mobile toggle */}
         <button
-          className="md:hidden text-hero-foreground p-1"
+          className="md:hidden text-foreground p-1"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -66,7 +68,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -74,7 +75,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-primary/98 backdrop-blur-2xl border-t border-hero-foreground/10"
+            className="md:hidden glass-strong border-t border-border"
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
               {navLinks.map((l, i) => (
@@ -86,15 +87,8 @@ const Navbar = () => {
                 >
                   <a
                     href={l.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setOpen(false);
-                      const target = document.querySelector(l.href);
-                      if (target) {
-                        setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 300);
-                      }
-                    }}
-                    className="block py-3 text-hero-foreground font-medium text-base border-b border-hero-foreground/5 cursor-pointer relative z-10"
+                    onClick={(e) => { e.preventDefault(); scrollTo(l.href); }}
+                    className="block py-3 text-foreground font-medium text-base border-b border-border/50 cursor-pointer"
                   >
                     {l.label}
                   </a>
@@ -103,19 +97,12 @@ const Navbar = () => {
               <motion.li
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.25 }}
+                transition={{ delay: 0.35 }}
               >
                 <a
                   href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setOpen(false);
-                    const target = document.querySelector("#contact");
-                    if (target) {
-                      setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 300);
-                    }
-                  }}
-                  className="inline-block mt-3 bg-cta text-cta-foreground font-semibold px-6 py-3 rounded-lg text-sm w-full text-center cursor-pointer relative z-10"
+                  onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+                  className="inline-block mt-3 bg-gradient-neon text-primary-foreground font-semibold px-6 py-3 rounded-lg text-sm w-full text-center cursor-pointer"
                 >
                   Get Started
                 </a>

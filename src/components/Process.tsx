@@ -1,62 +1,62 @@
 import { motion } from "framer-motion";
-import { Search, Users, Code, Share2 } from "lucide-react";
+import { Search, Palette, Code, Rocket } from "lucide-react";
 
 const steps = [
-  { icon: Search, title: "Discovery", desc: "We analyze your business, audience, and competition to build a solid foundation.", num: "01" },
-  { icon: Users, title: "Strategy", desc: "We craft a data-driven marketing plan tailored to your goals and budget.", num: "02" },
-  { icon: Code, title: "Build & Launch", desc: "We build conversion-optimized websites and manage your digital media presence.", num: "03" },
-  { icon: Share2, title: "Scale & Grow", desc: "We launch targeted ad campaigns on Facebook & Instagram for maximum ROI.", num: "04" },
+  { icon: Search, title: "Strategy & Research", desc: "Deep-dive into your market, audience, and competition to build a data-driven foundation." },
+  { icon: Palette, title: "UI/UX Engineering", desc: "Craft visually stunning, user-centric designs that guide visitors toward conversion." },
+  { icon: Code, title: "Development & Optimization", desc: "Build high-performance, SEO-ready digital solutions with clean, scalable code." },
+  { icon: Rocket, title: "Launch & Growth Scaling", desc: "Deploy, monitor, and continuously optimize for maximum ROI and scalability." },
 ];
 
-const container = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-const item = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
-
 const Process = () => (
-  <section id="about" className="section-padding bg-section-alt">
-    <div className="container mx-auto">
+  <section id="process" className="section-padding bg-background relative overflow-hidden">
+    <div className="absolute inset-0 grid-bg" />
+
+    <div className="container mx-auto relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center mb-14"
       >
-        <span className="text-accent text-xs font-semibold uppercase tracking-[0.2em] mb-3 block">
-          How It Works
+        <span className="text-neon-blue text-xs font-semibold uppercase tracking-[0.2em] mb-3 block">
+          Growth Framework
         </span>
-        <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground mb-4">
-          Our Process
+        <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
+          <span className="text-gradient-blue">Discover</span> → Design → Deploy → Scale
         </h2>
-        <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base leading-relaxed">
-          A proven 4-step approach to transform your digital presence and drive measurable results.
-        </p>
       </motion.div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
-      >
-        {steps.map((s) => (
+      <div className="max-w-3xl mx-auto space-y-0">
+        {steps.map((s, i) => (
           <motion.div
             key={s.title}
-            variants={item}
-            className="group relative bg-card rounded-2xl border border-border p-7 hover:shadow-premium hover:-translate-y-1 transition-all duration-400"
+            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
+            className="relative flex gap-6 group"
           >
-            <span className="absolute top-5 right-6 text-4xl font-heading font-bold text-border group-hover:text-cta/15 transition-colors duration-300">
-              {s.num}
-            </span>
-            <div className="mb-5 w-11 h-11 rounded-xl bg-primary/8 flex items-center justify-center">
-              <s.icon className="w-5 h-5 text-primary" strokeWidth={1.8} />
+            {/* Timeline line */}
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 rounded-xl bg-neon-blue/10 neon-border flex items-center justify-center flex-shrink-0 group-hover:bg-neon-blue/20 group-hover:shadow-neon-blue transition-all duration-500 z-10">
+                <s.icon className="w-5 h-5 text-neon-blue" strokeWidth={1.5} />
+              </div>
+              {i < steps.length - 1 && (
+                <div className="w-px h-full bg-gradient-to-b from-neon-blue/20 to-transparent min-h-[40px]" />
+              )}
             </div>
-            <h3 className="font-heading font-semibold text-base text-card-foreground mb-2">
-              {s.title}
-            </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+
+            <div className="glass neon-border rounded-2xl p-6 mb-6 flex-1 group-hover:shadow-neon-blue group-hover:-translate-y-0.5 transition-all duration-500">
+              <span className="text-neon-blue/40 text-xs font-heading font-bold tracking-wider mb-1 block">
+                0{i + 1}
+              </span>
+              <h3 className="font-heading font-semibold text-lg text-foreground mb-2">{s.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+            </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   </section>
 );
