@@ -1,19 +1,9 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-
-const countryCodes = [
-  { code: "+91", country: "India" },
-  { code: "+1", country: "USA / Canada" },
-  { code: "+44", country: "UK" },
-  { code: "+61", country: "Australia" },
-  { code: "+971", country: "UAE" },
-  { code: "+65", country: "Singapore" },
-  { code: "+49", country: "Germany" },
-  { code: "+33", country: "France" },
-];
+import { Mail, Phone, MapPin, Send, ChevronDown } from "lucide-react";
+import { countryCodes } from "@/lib/countryCodes";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -32,6 +22,18 @@ const contactInfo = [
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", countryCode: "+91", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const countryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (countryRef.current && !countryRef.current.contains(e.target as Node)) {
+        setIsCountryOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,22 +123,42 @@ const Contact = () => {
               <div>
                 <label className="block text-xs font-medium text-foreground mb-1.5">Phone *</label>
                 <div className="flex gap-2">
-                  <select
-                    value={form.countryCode}
-                    onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
-                    className="rounded-xl border border-border bg-muted/50 px-2 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow cursor-pointer"
-                  >
-                    {countryCodes.map((c) => (
-                      <option key={c.code} value={c.code}>
-                        {c.code}
-                      </option>
-                    ))}
-                  </select>
+                  <div ref={countryRef} className="relative shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setIsCountryOpen(!isCountryOpen)}
+                      className="h-full w-[5.5rem] rounded-xl border border-border bg-muted/50 px-2 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow flex items-center justify-between gap-1"
+                    >
+                      <span className="truncate">
+                        {countryCodes.find((c) => c.code === form.countryCode)?.flag} {form.countryCode}
+                      </span>
+                      <ChevronDown className="w-3 h-3 text-muted-foreground shrink-0" />
+                    </button>
+                    {isCountryOpen && (
+                      <div className="absolute z-50 mt-1 max-h-60 w-56 overflow-auto rounded-xl border border-border bg-card/95 backdrop-blur-md shadow-xl neon-border">
+                        {countryCodes.map((c) => (
+                          <button
+                            key={c.code}
+                            type="button"
+                            onClick={() => {
+                              setForm({ ...form, countryCode: c.code });
+                              setIsCountryOpen(false);
+                            }}
+                            className="w-full px-3 py-2 text-left text-sm text-foreground hover:bg-neon-blue/10 hover:text-neon-blue transition-colors flex items-center gap-2"
+                          >
+                            <span className="text-base shrink-0">{c.flag}</span>
+                            <span className="text-muted-foreground shrink-0">{c.code}</span>
+                            <span className="truncate">{c.country}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <input
                     type="tel"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="flex-1 rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow"
+                    className="flex-1 min-w-0 rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow"
                     placeholder="Phone number"
                   />
                 </div>
