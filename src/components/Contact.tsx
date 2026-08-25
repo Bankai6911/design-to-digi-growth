@@ -4,10 +4,22 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
+const countryCodes = [
+  { code: "+91", country: "India" },
+  { code: "+1", country: "USA / Canada" },
+  { code: "+44", country: "UK" },
+  { code: "+61", country: "Australia" },
+  { code: "+971", country: "UAE" },
+  { code: "+65", country: "Singapore" },
+  { code: "+49", country: "Germany" },
+  { code: "+33", country: "France" },
+];
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email").max(255),
-  phone: z.string().trim().max(20).optional(),
+  countryCode: z.string().min(1, "Country code is required"),
+  phone: z.string().trim().min(6, "Phone number is too short").max(15, "Phone number is too long"),
   message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
