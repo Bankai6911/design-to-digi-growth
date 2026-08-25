@@ -1,19 +1,9 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-
-const countryCodes = [
-  { code: "+91", country: "India" },
-  { code: "+1", country: "USA / Canada" },
-  { code: "+44", country: "UK" },
-  { code: "+61", country: "Australia" },
-  { code: "+971", country: "UAE" },
-  { code: "+65", country: "Singapore" },
-  { code: "+49", country: "Germany" },
-  { code: "+33", country: "France" },
-];
+import { Mail, Phone, MapPin, Send, ChevronDown } from "lucide-react";
+import { countryCodes } from "@/lib/countryCodes";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
