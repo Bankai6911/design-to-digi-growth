@@ -133,7 +133,7 @@ const Contact = () => {
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 rows={4}
                 className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 resize-none transition-shadow"
-                placeholder="Tell us about your project..."
+                placeholder="Tell us about your requirements..."
               />
               {errors.message && <p className="text-destructive text-xs mt-1">{errors.message}</p>}
             </div>
