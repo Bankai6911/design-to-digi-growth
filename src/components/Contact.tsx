@@ -13,8 +13,8 @@ const contactSchema = z.object({
 
 const contactInfo = [
   { icon: Mail, label: "Email", value: "wasades851@gmail.com" },
-  { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-  { icon: MapPin, label: "Location", value: "New York, NY" },
+  { icon: Phone, label: "Phone", value: "+91-9511646998" },
+  { icon: MapPin, label: "Location", value: "INDIA" },
 ];
 
 const Contact = () => {
