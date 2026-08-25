@@ -4,10 +4,22 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
+const countryCodes = [
+  { code: "+91", country: "India" },
+  { code: "+1", country: "USA / Canada" },
+  { code: "+44", country: "UK" },
+  { code: "+61", country: "Australia" },
+  { code: "+971", country: "UAE" },
+  { code: "+65", country: "Singapore" },
+  { code: "+49", country: "Germany" },
+  { code: "+33", country: "France" },
+];
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
   email: z.string().trim().email("Invalid email").max(255),
-  phone: z.string().trim().max(20).optional(),
+  countryCode: z.string().min(1, "Country code is required"),
+  phone: z.string().trim().min(6, "Phone number is too short").max(15, "Phone number is too long"),
   message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
@@ -18,7 +30,7 @@ const contactInfo = [
 ];
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", countryCode: "+91", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,7 +46,7 @@ const Contact = () => {
     }
     setErrors({});
     toast.success("Message sent! We'll get back to you soon.");
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setForm({ name: "", email: "", countryCode: "+91", phone: "", message: "" });
   };
 
   return (
@@ -107,13 +119,28 @@ const Contact = () => {
                 {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
               </div>
               <div>
-                <label className="block text-xs font-medium text-foreground mb-1.5">Phone</label>
-                <input
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow"
-                  placeholder="Phone (optional)"
-                />
+                <label className="block text-xs font-medium text-foreground mb-1.5">Phone *</label>
+                <div className="flex gap-2">
+                  <select
+                    value={form.countryCode}
+                    onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                    className="rounded-xl border border-border bg-muted/50 px-2 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow cursor-pointer"
+                  >
+                    {countryCodes.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.code}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="flex-1 rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow"
+                    placeholder="Phone number"
+                  />
+                </div>
+                {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
               </div>
             </div>
             <div>
