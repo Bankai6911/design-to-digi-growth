@@ -46,7 +46,7 @@ const Contact = () => {
     }
     setErrors({});
     toast.success("Message sent! We'll get back to you soon.");
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setForm({ name: "", email: "", countryCode: "+91", phone: "", message: "" });
   };
 
   return (
