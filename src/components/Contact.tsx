@@ -119,13 +119,28 @@ const Contact = () => {
                 {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
               </div>
               <div>
-                <label className="block text-xs font-medium text-foreground mb-1.5">Phone</label>
-                <input
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow"
-                  placeholder="Phone (optional)"
-                />
+                <label className="block text-xs font-medium text-foreground mb-1.5">Phone *</label>
+                <div className="flex gap-2">
+                  <select
+                    value={form.countryCode}
+                    onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                    className="rounded-xl border border-border bg-muted/50 px-2 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow cursor-pointer"
+                  >
+                    {countryCodes.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.code}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="flex-1 rounded-xl border border-border bg-muted/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-shadow"
+                    placeholder="Phone number"
+                  />
+                </div>
+                {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
               </div>
             </div>
             <div>
