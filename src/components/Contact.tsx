@@ -22,6 +22,18 @@ const contactInfo = [
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", countryCode: "+91", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const countryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (countryRef.current && !countryRef.current.contains(e.target as Node)) {
+        setIsCountryOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
