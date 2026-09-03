@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Search, Palette, Code, Rocket } from "lucide-react";
 import Section from "@/components/ui-kit/Section";
 import SectionHeading from "@/components/ui-kit/SectionHeading";
-import { revealProps, revealViewport, slideFrom } from "@/lib/motion";
+import { revealViewport, slideFrom } from "@/lib/motion";
 
 const steps = [
   {
@@ -54,9 +54,6 @@ const Process = () => (
           </div>
 
           <div className="glass neon-border rounded-2xl p-6 mb-6 flex-1 group-hover:shadow-neon-blue group-hover:-translate-y-0.5 transition-all duration-500">
-            <span className="text-neon-blue/40 text-xs font-heading font-bold tracking-wider mb-1 block">
-              0{i + 1}
-            </span>
             <h3 className="font-heading font-semibold text-lg text-foreground mb-2">{s.title}</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
           </div>
@@ -66,5 +63,4 @@ const Process = () => (
   </Section>
 );
 
-export { revealProps };
 export default Process;
