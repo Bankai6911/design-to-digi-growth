@@ -204,9 +204,10 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              className="group w-full flex items-center justify-center gap-2 bg-gradient-neon text-primary-foreground font-semibold py-3.5 rounded-xl text-sm btn-glow hover:scale-[1.02] transition-all duration-300"
+              disabled={isSubmitting}
+              className="group w-full flex items-center justify-center gap-2 bg-gradient-neon text-primary-foreground font-semibold py-3.5 rounded-xl text-sm btn-glow hover:scale-[1.02] transition-all duration-300 disabled:opacity-60 disabled:hover:scale-100"
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.form>
