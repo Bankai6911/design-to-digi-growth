@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Mail, Phone, MapPin, Send, ChevronDown } from "lucide-react";
 import { countryCodes } from "@/lib/countryCodes";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -35,7 +36,9 @@ const Contact = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = contactSchema.safeParse(form);
     if (!result.success) {
@@ -47,6 +50,19 @@ const Contact = () => {
       return;
     }
     setErrors({});
+    setIsSubmitting(true);
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: result.data.name,
+      email: result.data.email,
+      country_code: result.data.countryCode,
+      phone: result.data.phone,
+      message: result.data.message,
+    });
+    setIsSubmitting(false);
+    if (error) {
+      toast.error("Something went wrong. Please try again or email us directly.");
+      return;
+    }
     toast.success("Message sent! We'll get back to you soon.");
     setForm({ name: "", email: "", countryCode: "+91", phone: "", message: "" });
   };
