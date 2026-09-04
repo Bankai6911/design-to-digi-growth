@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3 } from "lucide-react";
+import NeonButton from "@/components/ui-kit/NeonButton";
 
 const Hero = () => (
   <section className="relative min-h-[100svh] bg-background overflow-hidden flex items-center">
@@ -71,22 +72,14 @@ const Hero = () => (
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="group inline-flex items-center justify-center gap-2 bg-gradient-neon text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm btn-glow hover:scale-[1.03] transition-all duration-300"
-          >
+          <NeonButton href="#contact">
             🚀 Launch My Business Online
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href="#services"
-            onClick={(e) => { e.preventDefault(); document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="group inline-flex items-center justify-center gap-2 glass neon-border text-foreground font-medium px-8 py-4 rounded-xl text-sm hover:bg-neon-blue/5 transition-all duration-300"
-          >
+          </NeonButton>
+          <NeonButton href="#services" variant="ghost">
             <BarChart3 className="w-4 h-4 text-neon-blue" />
             📈 Get a Free Growth Plan
-          </a>
+          </NeonButton>
         </motion.div>
       </div>
     </div>

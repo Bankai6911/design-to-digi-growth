@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Zap, ArrowRight } from "lucide-react";
+import NeonButton from "@/components/ui-kit/NeonButton";
+import { fadeUp, revealProps, revealViewport } from "@/lib/motion";
 
 const CTASection = () => (
   <section className="section-padding bg-background relative overflow-hidden">
@@ -9,9 +11,8 @@ const CTASection = () => (
 
     <div className="container mx-auto relative z-10">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        variants={fadeUp}
+        {...revealProps}
         className="glass neon-border rounded-3xl p-10 md:p-16 text-center max-w-3xl mx-auto relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/5 to-neon-purple/5" />
@@ -20,7 +21,7 @@ const CTASection = () => (
           <motion.div
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
+            viewport={revealViewport}
             transition={{ type: "spring", delay: 0.2 }}
             className="w-14 h-14 rounded-2xl bg-gradient-neon flex items-center justify-center mx-auto mb-6"
           >
@@ -36,14 +37,10 @@ const CTASection = () => (
             Let's build a digital growth system that drives real results for your business.
           </p>
 
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="group inline-flex items-center gap-2 bg-gradient-neon text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm btn-glow hover:scale-[1.03] transition-all duration-300"
-          >
+          <NeonButton href="#contact">
             ⚡ Let's Build Your Growth System
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </NeonButton>
         </div>
       </motion.div>
     </div>
